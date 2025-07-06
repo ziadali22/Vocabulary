@@ -38,7 +38,7 @@ struct OnboardingFlowView: View {
         case referral
         case age
         case gender
-        case done
+        case success
         
         var title: String {
             switch self {
@@ -48,7 +48,7 @@ struct OnboardingFlowView: View {
                 return "What is your age group?"
             case .gender:
                 return "What is your gender?"
-            case .done:
+            case .success:
                 return ""
             }
         }
@@ -64,7 +64,7 @@ struct OnboardingFlowView: View {
         GeometryReader { geometry in
             let size = geometry.size
             ZStack {
-                Color(hex: "2A324B").ignoresSafeArea()
+                AppColors.background.ignoresSafeArea()
                 
                 switch currentStep {
                 case .referral:
@@ -97,27 +97,11 @@ struct OnboardingFlowView: View {
                     }
                     .transition(.opacity)
                     
-                case .done:
-                    VStack(spacing: 30) {
-                        Text("🎉")
-                            .font(.system(size: 80))
+                case .success:
+                    SuccessView(onSelect: {
                         
-                        Text("Onboarding complete!")
-                            .font(.title)
-                            .foregroundColor(.white)
-                        
-                        Button("Get Started") {
-                            
-                        }
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.orange)
-                        .cornerRadius(12)
-                        .padding(.horizontal, 20)
-                    }
-                    .transition(.opacity)
+                    })
+                        .transition(.opacity)
                 }
             }
             .animation(.easeInOut(duration: 0.3), value: currentStep)
@@ -134,8 +118,8 @@ struct OnboardingFlowView: View {
             case .age:
                 currentStep = .gender
             case .gender:
-                currentStep = .done
-            case .done:
+                currentStep = .success
+            case .success:
                 break
             }
         }
