@@ -39,6 +39,7 @@ struct OnboardingFlowView: View {
         case age
         case gender
         case success
+        case nameInput
         
         var title: String {
             switch self {
@@ -49,7 +50,9 @@ struct OnboardingFlowView: View {
             case .gender:
                 return "What is your gender?"
             case .success:
-                return ""
+                return "Customize the app to improve your experience 🎉"
+            case .nameInput:
+                return "What do you want to be called?"
             }
         }
     }
@@ -98,10 +101,18 @@ struct OnboardingFlowView: View {
                     .transition(.opacity)
                     
                 case .success:
-                    SuccessView(onSelect: {
-                        
+                    SuccessView(title: currentStep.title, onSelect: {
+                        proceedToNext()
                     })
                         .transition(.opacity)
+                    
+                case .nameInput:
+                    NameInputView(title: currentStep.title) { _ in
+                        
+                    } onSkip: {
+                        
+                    }
+
                 }
             }
             .animation(.easeInOut(duration: 0.3), value: currentStep)
@@ -120,6 +131,8 @@ struct OnboardingFlowView: View {
             case .gender:
                 currentStep = .success
             case .success:
+                currentStep = .nameInput
+            case .nameInput:
                 break
             }
         }
