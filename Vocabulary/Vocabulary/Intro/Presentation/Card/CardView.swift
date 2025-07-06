@@ -23,7 +23,7 @@ struct CardView: View {
             )
         }
         .padding(24)
-        .background(Color(hex: "2A324B"))
+        .background(AppColors.background)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .onAppear {
             startAnimations()

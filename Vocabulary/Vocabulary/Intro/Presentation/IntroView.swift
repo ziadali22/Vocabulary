@@ -29,7 +29,7 @@ struct IntroView: View {
                 CardView(showWalkthrough: $showWalkThrough)
                     .padding(.bottom, safeArea.bottom)
                     .background(
-                        Color(hex: "2A324B"),
+                        AppColors.background,
                         in: .rect(topLeadingRadius: 25, topTrailingRadius: 25)
                     )
             }

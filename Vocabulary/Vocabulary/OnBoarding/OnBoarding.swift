@@ -20,11 +20,10 @@ struct OnBoarding: View {
                                dampingFraction: 0.85,
                                blendDuration: 0.85),
                    value: showWalkthrough)
-        .background(Color(hex: "2A324B"))
+        .background(AppColors.background)
     }
 }
 
 #Preview {
     OnBoarding()
-        .router()
 }
