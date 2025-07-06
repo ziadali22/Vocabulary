@@ -28,9 +28,8 @@ struct IntroView: View {
                 
                 CardView(showWalkthrough: $showWalkThrough)
                     .padding(.bottom, safeArea.bottom)
-                    .padding(.top, 10)
                     .background(
-                        Color(.systemBackground),
+                        Color(hex: "2A324B"),
                         in: .rect(topLeadingRadius: 25, topTrailingRadius: 25)
                     )
             }
@@ -44,8 +43,4 @@ struct IntroView: View {
             viewModel.stopAnimations()
         }
     }
-}
-
-#Preview {
-    IntroView(showWalkThrough: .constant(false))
 }

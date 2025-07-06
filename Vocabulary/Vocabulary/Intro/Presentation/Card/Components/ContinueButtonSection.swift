@@ -12,23 +12,33 @@ struct ContinueButtonSection: View {
     @Binding var showWalkthrough: Bool
     
     var body: some View {
-        HStack {
-            Spacer()
-            Button(action: {
+        HStack(alignment: .center) {
+            Button {
                 withAnimation {
                     showWalkthrough.toggle()
                 }
-            }) {
+            } label: {
                 if !showWalkthrough {
-                    Image(systemName: "arrow.down.app")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .foregroundStyle(Color(.label))
-                        .offset(y: isDownloadIconAnimating ? 10 : -10)
+                    animateContinueButton()
                 }
             }
-            .padding(.top, 16)
-            Spacer()
+            .padding(.top, 8)
+            .padding(.horizontal, 16)
+        }
+        .padding(.horizontal, 24)
+    }
+    
+    private func animateContinueButton() -> some View {
+        VStack(spacing: 24) {
+            Image(systemName: "arrow.down.circle")
+                .resizable()
+                .frame(width: 40, height: 40)
+                .foregroundStyle(.white)
+                .offset(y: isDownloadIconAnimating ? 10 : -10)
+            
+            Text("Let's Start")
+                .font(.title3)
+                .foregroundStyle(.white)
         }
     }
 }

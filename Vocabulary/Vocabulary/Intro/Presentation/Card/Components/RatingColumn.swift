@@ -12,7 +12,7 @@ struct RatingColumn: View {
         VStack(spacing: 4) {
             Text("4.8")
                 .font(.title2.bold())
-                .foregroundStyle(.primary)
+                .foregroundStyle(.white)
             HStack(spacing: 2) {
                 ForEach(0..<4, id: \.self) { _ in
                     Image(systemName: "star.fill")

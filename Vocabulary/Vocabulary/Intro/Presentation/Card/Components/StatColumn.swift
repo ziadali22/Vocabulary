@@ -15,10 +15,10 @@ struct StatColumn: View {
         VStack(spacing: 4) {
             Text(title)
                 .font(.title3.bold())
-                .foregroundStyle(.primary)
+                .foregroundStyle(.white)
             Text(subtitle)
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color(.systemGray))
         }
     }
 }

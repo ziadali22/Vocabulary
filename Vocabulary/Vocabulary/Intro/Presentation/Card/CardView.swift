@@ -22,8 +22,8 @@ struct CardView: View {
                 showWalkthrough: $showWalkthrough
             )
         }
-        .padding(28)
-        .background(Color(.systemBackground))
+        .padding(24)
+        .background(Color(hex: "2A324B"))
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .onAppear {
             startAnimations()

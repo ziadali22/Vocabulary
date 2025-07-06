@@ -16,11 +16,11 @@ final class IntroDataProvider: IntroDataProviding {
         .init(text: "Daily vocabulary",
               textColor: Color(hex: "FCF6B1"),
               circleColor: Color(hex:"FCF6B1"),
-              backgroundColor: Color(hex: "2D1E2F")),
+              backgroundColor: Color(hex: "A9E5BB")),
         
         .init(text: "10,000+ words",
-              textColor: Color(hex: "2D1E2F"),
-              circleColor: Color(hex: "2D1E2F"),
+              textColor: Color(hex: "A9E5BB"),
+              circleColor: Color(hex: "A9E5BB"),
               backgroundColor: Color(hex: "E3170A")),
         
             .init(text: "Learn Smarter",
