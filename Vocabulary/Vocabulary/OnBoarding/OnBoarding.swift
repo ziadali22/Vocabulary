@@ -13,15 +13,18 @@ struct OnBoarding: View {
     var body: some View {
         ZStack {
             IntroView(showWalkThrough: $showWalkthrough)
-                .animation(
-                    .interactiveSpring(response: 1.1, dampingFraction: 0.85, blendDuration: 0.85),
-                    value: showWalkthrough
-                )
+            ReferralView(showWalkThrough: $showWalkthrough)
         }
-        .background(Color(.systemBackground))
+        .animation(
+            .interactiveSpring(response: 0.85,
+                               dampingFraction: 0.85,
+                               blendDuration: 0.85),
+                   value: showWalkthrough)
+        .background(Color(hex: "2A324B"))
     }
 }
 
 #Preview {
     OnBoarding()
+        .router()
 }
