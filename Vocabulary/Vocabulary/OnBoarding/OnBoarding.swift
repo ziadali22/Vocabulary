@@ -13,7 +13,7 @@ struct OnBoarding: View {
     var body: some View {
         ZStack {
             IntroView(showWalkThrough: $showWalkthrough)
-            ReferralView(showWalkThrough: $showWalkthrough)
+            OnboardingFlowView(showWalkThrough: $showWalkthrough)
         }
         .animation(
             .interactiveSpring(response: 0.85,
