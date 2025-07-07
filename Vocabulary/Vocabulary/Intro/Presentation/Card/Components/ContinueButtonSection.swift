@@ -33,12 +33,12 @@ struct ContinueButtonSection: View {
             Image(systemName: "arrow.down.circle")
                 .resizable()
                 .frame(width: 40, height: 40)
-                .foregroundStyle(.white)
+                .foregroundStyle(AppColors.primaryText)
                 .offset(y: isDownloadIconAnimating ? 10 : -10)
             
             Text("Let's Start")
                 .font(.title3)
-                .foregroundStyle(.white)
+                .foregroundStyle(AppColors.primaryText)
         }
     }
 }

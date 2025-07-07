@@ -13,7 +13,7 @@ struct HeaderTextSection: View {
     var body: some View {
         Text("Expand Your Vocabulary in 1 minute a day")
             .font(.title.bold())
-            .foregroundStyle(.white)
+            .foregroundStyle(AppColors.primaryText)
             .multilineTextAlignment(.center)
             .shadow(color: .black.opacity(0.3), radius: 4, x: 2, y: 2)
             .offset(x: isTextVisible ? 0 : -250)

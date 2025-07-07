@@ -11,11 +11,18 @@ import Lottie
 struct SuccessView: View {
     let title: String
     let onSelect: () -> Void
+    private let hapticProvider: HapticFeedbackProviding
     
     @State private var titleVisible = false
     @State private var lottieVisible = false
     @State private var buttonVisible = false
     
+    init(title: String, onSelect: @escaping () -> Void,
+         hapticProvider: HapticFeedbackProviding = HapticFeedbackManager(), ) {
+        self.title = title
+        self.onSelect = onSelect
+        self.hapticProvider = hapticProvider
+    }
     
     var body: some View {
         VStack(spacing: 40) {
@@ -23,7 +30,7 @@ struct SuccessView: View {
             Text(title)
                 .font(.title2.bold())
                 .multilineTextAlignment(.center)
-                .foregroundStyle(.white)
+                .foregroundStyle(AppColors.primaryText)
                 .shadow(color: .black, radius: 1, y: 3)
                 .padding(.horizontal)
                 .offset(y: titleVisible ? 0 : -50)
@@ -41,23 +48,12 @@ struct SuccessView: View {
                 .opacity(lottieVisible ? 1 : 0)
                 .animation(.spring(response: 1.0, dampingFraction: 0.7).delay(0.4), value: lottieVisible)
             
-            Button(action: {
-                onSelect()
-            }) {
-                Text("Continue")
-                    .font(.headline)
-                    .foregroundColor(.black)
-                    .frame(height: 56)
-                    .frame(maxWidth: .infinity)
-                    .background(AppColors.primaryButton)
-                    .cornerRadius(28)
-            }
-            .padding(.horizontal)
-            .padding(.top, 32)
-            .shadow(color: .black, radius: 1, y: 5)
-            .offset(y: buttonVisible ? 0 : 50)
-            .opacity(buttonVisible ? 1 : 0)
-            .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.6), value: buttonVisible)
+            ContinueButton(
+                isEnabled: true,
+                hasAppeared: buttonVisible,
+                delay: 0.6,
+                onTap: onContinue
+            )
         }
         .padding()
         .onAppear {
@@ -65,6 +61,11 @@ struct SuccessView: View {
             lottieVisible = true
             buttonVisible = true
         }
+    }
+    
+    private func onContinue() {
+        onSelect()
+        hapticProvider.provideMediumImpact()
     }
 }
 
