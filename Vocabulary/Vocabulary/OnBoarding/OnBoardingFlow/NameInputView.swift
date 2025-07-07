@@ -7,99 +7,108 @@
 
 import SwiftUI
 
+// MARK: - Main
 struct NameInputView: View {
     @State private var name: String = ""
     @FocusState private var isTextFieldFocused: Bool
-    
-    @State private var titleVisible = false
-    @State private var lottieVisible = false
-    @State private var buttonVisible = false
-    
+    @State private var hasAppeared = false
+
     let title: String
-    let onContinue: (String) -> Void
+    let onContinue: () -> Void
     let onSkip: () -> Void
-    
-    private let suggestedNames = ["Ziad Ali", "Ziad"]
-    
+
     var body: some View {
         VStack {
+            NameInputHeader(title: title, hasAppeared: hasAppeared, onSkip: onSkip)
 
-            HStack {
-                Spacer()
-                Button("Skip") {
-                    onSkip()
-                }
-                .foregroundColor(.white)
-                .font(.system(size: 17))
-            }
-            .padding(.horizontal, 40)
-            .padding(.top, 80)
-            
-            
             VStack(spacing: 24) {
-                
-                VStack(spacing: 16) {
-                    Text(title)
-                        .font(.system(size: 32, weight: .medium))
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                        .shadow(color: .black, radius: 1, y: 3)
-                    
-                    Text("Your name is used to personalize your experience")
-                        .font(.system(size: 17))
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 32)
-                }
-                
-                TextField("Your name", text: $name)
-                    .focused($isTextFieldFocused)
-                    .font(.system(size: 17))
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.black.opacity(0.3))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(isTextFieldFocused ? Color.blue : Color.gray.opacity(0.3), lineWidth: 1)
-                            )
-                    )
-                    .padding(.horizontal)
-                    .padding(.top, 32)
+                NameTextField(
+                    name: $name,
+                    isFocused: $isTextFieldFocused
+                )
+                .padding(.top, 32)
             }
             .padding(.top, 60)
-            
-            
-            Button(action: {
-                onContinue(name)
-            }) {
-                Text("Continue")
-                    .font(.headline)
-                    .foregroundColor(.black)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 56)
-                    .background(AppColors.primaryButton)
-                    .cornerRadius(28)
-            }
-            .padding(.horizontal)
-            .padding(.top, 32)
-            .shadow(color: .black, radius: 1, y: 5)
-            .disabled(name.trimmingCharacters(in: .whitespaces).isEmpty)
-            .opacity(name.trimmingCharacters(in: .whitespaces).isEmpty ? 0.6 : 1.0)
-            
+
+            ContinueButton(
+                isEnabled: !name.trimmingCharacters(in: .whitespaces).isEmpty,
+                hasAppeared: hasAppeared,
+                delay: 0.6,
+                onTap: onContinue
+            )
+            .padding(.top, 50)
+
             Spacer()
         }
-        
+        .padding(.horizontal, 20)
         .background(AppColors.background)
         .ignoresSafeArea()
         .onTapGesture {
             isTextFieldFocused = false
         }
+        .onAppear {
+            withAnimation { hasAppeared = true }
+        }
+        .onDisappear {
+            hasAppeared = false
+        }
     }
 }
 
+// MARK: - Header
+struct NameInputHeader: View {
+    let title: String
+    let hasAppeared: Bool
+    let onSkip: () -> Void
+
+    var body: some View {
+        VStack(spacing: 16) {
+            HStack {
+                Spacer()
+                SkipButton(hasAppeared: hasAppeared, onSkip: onSkip)
+            }
+            .padding(.top, 80)
+
+            Text(title)
+                .font(.system(size: 32, weight: .medium))
+                .foregroundColor(AppColors.primaryText)
+                .multilineTextAlignment(.center)
+                .shadow(color: .black, radius: 1, y: 3)
+
+            Text("Your name is used to personalize your experience")
+                .font(AppTypography.body)
+                .foregroundColor(.gray)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 32)
+        }
+    }
+}
+
+// MARK: - TextField
+struct NameTextField: View {
+    @Binding var name: String
+    var isFocused: FocusState<Bool>.Binding
+
+    var body: some View {
+        TextField("Your name", text: $name)
+            .focused(isFocused)
+            .font(AppTypography.body)
+            .foregroundColor(AppColors.primaryText)
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color.black.opacity(0.3))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(isFocused.wrappedValue ? Color.blue : Color.gray.opacity(0.3), lineWidth: 1)
+                    )
+            )
+    }
+}
+
+
+
 #Preview {
-    NameInputView(title: "", onContinue: {_ in }, onSkip: {})
+    NameInputView(title: "", onContinue: { }, onSkip: {})
 
 }

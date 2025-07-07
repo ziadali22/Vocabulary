@@ -30,8 +30,3 @@ extension Color {
                   opacity: Double(a) / 255)
     }
 }
-
-struct AppColors {
-    static let background = Color(hex: "2A324B")
-    static let primaryButton = Color(hex: "F7C59F")
-}
