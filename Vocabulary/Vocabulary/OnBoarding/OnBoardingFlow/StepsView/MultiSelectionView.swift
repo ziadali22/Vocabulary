@@ -1,5 +1,5 @@
 //
-//  GoalsSelectionView.swift
+//  MultiSelectionView.swift
 //  Vocabulary
 //
 //  Created by Ziad Khalil on 07/07/2025.
@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct GoalsSelectionView: View {
+struct MultiSelectionView: View {
     let title: String
     let options: [String]
-    @Binding var selectedGoals: Set<String>
+    @Binding var selectedOptions: Set<String>
     let onContinue: () -> Void
     let onSkip: () -> Void
 
@@ -18,18 +18,18 @@ struct GoalsSelectionView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            GoalsSelectionHeader(title: title, onSkip: onSkip, hasAppeared: hasAppeared)
+            MultiSelectionHeader(title: title, onSkip: onSkip, hasAppeared: hasAppeared)
 
-            GoalOptionsList(
+            MultiOptionsList(
                 options: options,
-                selectedGoals: $selectedGoals,
+                selectedOptions: $selectedOptions,
                 hasAppeared: hasAppeared
             )
 
             Spacer()
 
             ContinueButton(
-                isEnabled: !selectedGoals.isEmpty,
+                isEnabled: !selectedOptions.isEmpty,
                 hasAppeared: hasAppeared,
                 delay: Double(options.count) * 0.1 + 0.5,
                 onTap: onContinue
@@ -44,7 +44,7 @@ struct GoalsSelectionView: View {
     }
 }
 
-struct GoalsSelectionHeader: View {
+struct MultiSelectionHeader: View {
     let title: String
     let onSkip: () -> Void
     let hasAppeared: Bool
@@ -67,18 +67,18 @@ struct GoalsSelectionHeader: View {
     }
 }
 
-struct GoalOptionsList: View {
+struct MultiOptionsList: View {
     let options: [String]
-    @Binding var selectedGoals: Set<String>
+    @Binding var selectedOptions: Set<String>
     let hasAppeared: Bool
     private let staggerDelay: TimeInterval = 0.1
 
     var body: some View {
         VStack(spacing: 16) {
             ForEach(Array(options.enumerated()), id: \.element) { index, option in
-                GoalOptionButton(
+                MultiOptionButton(
                     title: option,
-                    isSelected: selectedGoals.contains(option)
+                    isSelected: selectedOptions.contains(option)
                 ) {
                     toggleSelection(option)
                 }
@@ -96,10 +96,10 @@ struct GoalOptionsList: View {
 
     private func toggleSelection(_ option: String) {
         withAnimation(AppAnimations.selection) {
-            if selectedGoals.contains(option) {
-                selectedGoals.remove(option)
+            if selectedOptions.contains(option) {
+                selectedOptions.remove(option)
             } else {
-                selectedGoals.insert(option)
+                selectedOptions.insert(option)
             }
         }
     }
@@ -109,7 +109,7 @@ struct GoalOptionsList: View {
 
 // MARK: - Goal Option Button Component
 
-struct GoalOptionButton: View {
+struct MultiOptionButton: View {
     let title: String
     let isSelected: Bool
     let action: () -> Void

@@ -10,6 +10,7 @@ import Lottie
 
 struct SuccessView: View {
     let title: String
+    let animationName: String
     let onSelect: () -> Void
     private let hapticProvider: HapticFeedbackProviding
     
@@ -17,9 +18,10 @@ struct SuccessView: View {
     @State private var lottieVisible = false
     @State private var buttonVisible = false
     
-    init(title: String, onSelect: @escaping () -> Void,
+    init(title: String, animationName: String, onSelect: @escaping () -> Void,
          hapticProvider: HapticFeedbackProviding = HapticFeedbackManager(), ) {
         self.title = title
+        self.animationName = animationName
         self.onSelect = onSelect
         self.hapticProvider = hapticProvider
     }
@@ -37,7 +39,7 @@ struct SuccessView: View {
                 .opacity(titleVisible ? 1 : 0)
                 .animation(.spring(response: 0.8, dampingFraction: 0.8).delay(0.2), value: titleVisible)
             
-            LottieView(animation: .named("learn.json"))
+            LottieView(animation: .named(animationName))
                 .configure({ lottie in
                     lottie.contentMode = .scaleAspectFill
                 })
@@ -70,5 +72,5 @@ struct SuccessView: View {
 }
 
 #Preview {
-    SuccessView(title: .init("Success"), onSelect: {})
+    SuccessView(title: .init("Success"), animationName: "", onSelect: {})
 }
