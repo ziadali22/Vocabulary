@@ -33,6 +33,14 @@ enum GenderOptions: String, OnboardingOption {
     case preferNotToSay = "Prefer not to say"
 }
 
+enum GoalsOptions: String, OnboardingOption {
+        case enjoy = "Enjoy learning new words"
+        case improve = "Improve my job prospects"
+        case getReady = "Get ready for a test"
+        case enhance = "Enhance my lexicon"
+        case other = "Other"
+}
+
 struct OnboardingFlowView: View {
     enum Step: CaseIterable {
         case referral
@@ -40,6 +48,7 @@ struct OnboardingFlowView: View {
         case gender
         case success
         case nameInput
+        case goals
         
         var title: String {
             switch self {
@@ -53,6 +62,8 @@ struct OnboardingFlowView: View {
                 return "Customize the app to improve your experience 🎉"
             case .nameInput:
                 return "What do you want to be called?"
+            case .goals:
+                return "Do you have a specific goal in mind?"
             }
         }
     }
@@ -61,6 +72,7 @@ struct OnboardingFlowView: View {
     @State private var selectedReferral: Referral?
     @State private var selectedAge: AgeRange?
     @State private var selectedGender: GenderOptions?
+    @State private var selectedGoals: Set<String> = []
     @Binding var showWalkThrough: Bool
 
     var body: some View {
@@ -107,11 +119,31 @@ struct OnboardingFlowView: View {
                         .transition(.opacity)
                     
                 case .nameInput:
-                    NameInputView(title: currentStep.title) { _ in
-                        
+                    NameInputView(title: currentStep.title) { 
+                        proceedToNext()
                     } onSkip: {
                         
                     }
+                    
+                case .goals:
+                    GoalsSelectionView(
+                        title: currentStep.title,
+                        options: [
+                            "Enjoy learning new words",
+                            "Improve my job prospects",
+                            "Get ready for a test",
+                            "Enhance my lexicon",
+                            "Other"
+                        ],
+                        selectedGoals: $selectedGoals,
+                        onContinue: {
+                            proceedToNext()
+                        },
+                        onSkip: {
+                            proceedToNext()
+                        }
+                    )
+                    .transition(.opacity)
 
                 }
             }
@@ -133,6 +165,8 @@ struct OnboardingFlowView: View {
             case .success:
                 currentStep = .nameInput
             case .nameInput:
+                currentStep = .goals
+            case .goals:
                 break
             }
         }
