@@ -34,11 +34,19 @@ enum GenderOptions: String, OnboardingOption {
 }
 
 enum GoalsOptions: String, OnboardingOption {
-        case enjoy = "Enjoy learning new words"
-        case improve = "Improve my job prospects"
-        case getReady = "Get ready for a test"
-        case enhance = "Enhance my lexicon"
-        case other = "Other"
+    case enjoy = "Enjoy learning new words"
+    case improve = "Improve my job prospects"
+    case getReady = "Get ready for a test"
+    case enhance = "Enhance my lexicon"
+    case other = "Other"
+}
+
+enum TopicsOptions: String, OnboardingOption {
+    case emotions = "Emotions"
+    case socity = "Socity"
+    case human = "Human body"
+    case foreign = "Words in foreign languages"
+    case business = "Business"
 }
 
 struct OnboardingFlowView: View {
@@ -49,6 +57,8 @@ struct OnboardingFlowView: View {
         case success
         case nameInput
         case goals
+        case topics
+        case done
         
         var title: String {
             switch self {
@@ -64,17 +74,22 @@ struct OnboardingFlowView: View {
                 return "What do you want to be called?"
             case .goals:
                 return "Do you have a specific goal in mind?"
+            case .topics:
+                return "Which topics are you interested in?"
+            case .done:
+                return "Ready to Unlock New Words?"
             }
         }
     }
-
+    
     @State private var currentStep: Step = .referral
     @State private var selectedReferral: Referral?
     @State private var selectedAge: AgeRange?
     @State private var selectedGender: GenderOptions?
     @State private var selectedGoals: Set<String> = []
+    @State private var selectedTopics: Set<String> = []
     @Binding var showWalkThrough: Bool
-
+    
     var body: some View {
         GeometryReader { geometry in
             let size = geometry.size
@@ -113,29 +128,23 @@ struct OnboardingFlowView: View {
                     .transition(.opacity)
                     
                 case .success:
-                    SuccessView(title: currentStep.title, onSelect: {
+                    SuccessView(title: currentStep.title, animationName: "learn.json", onSelect: {
                         proceedToNext()
                     })
-                        .transition(.opacity)
+                    .transition(.opacity)
                     
                 case .nameInput:
-                    NameInputView(title: currentStep.title) { 
+                    NameInputView(title: currentStep.title) {
                         proceedToNext()
                     } onSkip: {
                         
                     }
                     
                 case .goals:
-                    GoalsSelectionView(
+                    MultiSelectionView(
                         title: currentStep.title,
-                        options: [
-                            "Enjoy learning new words",
-                            "Improve my job prospects",
-                            "Get ready for a test",
-                            "Enhance my lexicon",
-                            "Other"
-                        ],
-                        selectedGoals: $selectedGoals,
+                        options: GoalsOptions.allCases.map(\.rawValue),
+                        selectedOptions: $selectedGoals,
                         onContinue: {
                             proceedToNext()
                         },
@@ -144,7 +153,18 @@ struct OnboardingFlowView: View {
                         }
                     )
                     .transition(.opacity)
-
+                    
+                case .topics:
+                    MultiSelectionView(title: currentStep.title,
+                                       options: TopicsOptions.allCases.map(\.rawValue),
+                                       selectedOptions: $selectedTopics,
+                                       onContinue: {proceedToNext()},
+                                       onSkip: {})
+                case .done:
+                    SuccessView(title: currentStep.title, animationName: "learn2.json", onSelect: {
+                        proceedToNext()
+                    })
+                    .transition(.opacity)
                 }
             }
             .animation(.easeInOut(duration: 0.3), value: currentStep)
@@ -167,6 +187,10 @@ struct OnboardingFlowView: View {
             case .nameInput:
                 currentStep = .goals
             case .goals:
+                currentStep = .topics
+            case .topics:
+                currentStep = .done
+            case .done:
                 break
             }
         }
