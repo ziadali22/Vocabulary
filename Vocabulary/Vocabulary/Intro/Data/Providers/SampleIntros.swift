@@ -9,23 +9,23 @@ import SwiftUI
 final class IntroDataProvider: IntroDataProviding {
     let introItems: [IntroItem] = [
         .init(text: "Learn Smarter",
-              textColor: Color(hex: "E3170A"),
-              circleColor: Color(hex: "F7B32B"),
-              backgroundColor: Color(hex: "FCF6B1")),
+              textColor: Color(hex: "000000"),
+              circleColor: Color(hex: "000000"),
+              backgroundColor: Color(hex: "FFEFD3")),
         
         .init(text: "Daily vocabulary",
-              textColor: Color(hex: "FCF6B1"),
-              circleColor: Color(hex:"FCF6B1"),
-              backgroundColor: Color(hex: "A9E5BB")),
+              textColor: Color(hex: "FFEFD3"),
+              circleColor: Color(hex:"FFEFD3"),
+              backgroundColor: Color(hex: "294C60")),
         
         .init(text: "10,000+ words",
-              textColor: Color(hex: "A9E5BB"),
-              circleColor: Color(hex: "A9E5BB"),
-              backgroundColor: Color(hex: "E3170A")),
+              textColor: Color(hex: "294C60"),
+              circleColor: Color(hex: "294C60"),
+              backgroundColor: Color(hex: "FFC49B")),
         
             .init(text: "Learn Smarter",
-                  textColor: Color(hex: "E3170A"),
-                  circleColor: Color(hex: "F7B32B"),
-                  backgroundColor: Color(hex: "FCF6B1"))
+                  textColor: Color(hex: "000000"),
+                  circleColor: Color(hex: "000000"),
+                  backgroundColor: Color(hex: "FFEFD3")),
     ]
 }
