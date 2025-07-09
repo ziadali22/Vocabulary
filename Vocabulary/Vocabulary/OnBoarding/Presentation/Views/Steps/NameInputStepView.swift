@@ -84,7 +84,6 @@ struct NameInputStepView: View {
                 )
                 .disabled(viewModel.isProcessing)
                 
-                Spacer()
             }
         }
         .background(AppColors.background)

@@ -22,8 +22,6 @@ struct MultiSelectionStepView<T: OnboardingOption>: View {
                 MultiOptionListView(viewModel: viewModel,
                                     hasAppeared: hasAppeared)
                 
-                Spacer()
-                
                 // Continue Button
                 ContinueButton(
                     isEnabled: viewModel.canContinue,
@@ -85,5 +83,6 @@ struct MultiOptionListView<T: OnboardingOption>: View {
         }
         .padding(.horizontal, 20)
         .padding(.top, 32)
+        .padding(.bottom, 120)
     }
 }
