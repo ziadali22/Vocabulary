@@ -36,6 +36,5 @@ struct SingleSelectionStepView<T: OnboardingOption>: View {
                 viewModel.selectOption(selected)
             }
         }
-        .disabled(viewModel.isProcessing)
     }
 }

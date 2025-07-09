@@ -34,7 +34,7 @@ struct AnimatedOptionsView<T: OnboardingOption>: View {
                         .opacity(hasAppeared ? 1 : 0)
                         .offset(y: hasAppeared ? 0 : 20)
                         .animation(
-                            .easeOut(duration: 0.4)
+                            .easeIn(duration: 0.4)
                                 .delay(Double(index) * staggerDelay),
                             value: hasAppeared
                         )
