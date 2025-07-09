@@ -35,7 +35,7 @@ struct MultiOptionButton: View {
                 if isSelected { checkmark }
             }
             .padding(.horizontal, 24)
-            .frame(height: 56)
+            .frame(height: ScreenSizeConfiguration.isCompactHeight ? 45 : 56)
             .frame(maxWidth: .infinity)
             .contentShape(Rectangle())
         }
@@ -103,10 +103,10 @@ struct OptionButtonBackgroundStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .background(
-                RoundedRectangle(cornerRadius: 25)
+                RoundedRectangle(cornerRadius: ScreenSizeConfiguration.isCompactHeight ? 12 : 25)
                     .fill(backgroundFill)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 25)
+                        RoundedRectangle(cornerRadius: ScreenSizeConfiguration.isCompactHeight ? 12 : 25)
                             .stroke(AppColors.border, lineWidth: 1)
                     )
             )

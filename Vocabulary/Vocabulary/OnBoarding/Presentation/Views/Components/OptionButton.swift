@@ -10,8 +10,8 @@ import SwiftUI
 struct OnBoardingSpacing {
     static let headerHorizontal: CGFloat = 20
     static let headerTop: CGFloat = 40
-    static let buttonHorizontal: CGFloat = 20
-    static let buttonVertical: CGFloat = 18
+    static let buttonHorizontal: CGFloat = ScreenSizeConfiguration.isCompactHeight ? 12 : 20
+    static let buttonVertical: CGFloat = ScreenSizeConfiguration.isCompactHeight ? 12 : 18
     static let selectionIndicatorSize: CGFloat = 26
 }
 
@@ -96,10 +96,10 @@ struct SingleOptionButtonBackgroundStyle: ViewModifier {
     // MARK: - Private Computed Properties
     
     private var backgroundShape: some View {
-        RoundedRectangle(cornerRadius: 25)
+        RoundedRectangle(cornerRadius: ScreenSizeConfiguration.isCompactHeight ? 12 : 25)
             .fill(backgroundFill)
             .overlay(
-                RoundedRectangle(cornerRadius: 25)
+                RoundedRectangle(cornerRadius: ScreenSizeConfiguration.isCompactHeight ? 12 : 25)
                     .stroke(AppColors.border, lineWidth: 1)
             )
     }

@@ -22,7 +22,7 @@ struct ContinueButton: View {
         .opacity(hasAppeared ? (isEnabled ? 1 : 0.6) : 0)
         .offset(y: hasAppeared ? 0 : 50)
         .padding(.horizontal, 20)
-        .padding(.bottom, 40)
+        .padding(.bottom, 30)
         .disabled(!isEnabled)
         .animation(AppAnimations.defaultEaseOut.delay(delay), value: hasAppeared)
         .animation(AppAnimations.selection, value: isEnabled)
@@ -34,7 +34,7 @@ fileprivate struct GoalsButtonStyle: ButtonStyle {
         configuration.label
             .font(AppTypography.button)
             .foregroundColor(.black)
-            .frame(height: 56)
+            .frame(height: ScreenSizeConfiguration.isCompactHeight ? 45 : 56)
             .frame(maxWidth: .infinity)
             .background(AppColors.primaryButton)
             .cornerRadius(28)
