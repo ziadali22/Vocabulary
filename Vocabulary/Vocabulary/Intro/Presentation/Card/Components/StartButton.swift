@@ -74,7 +74,7 @@ private struct AnimatedButtonStyle: ButtonStyle {
             .foregroundColor(.black)
             .frame(
                 width: isTransitioning ? 56 : nil,
-                height: isTransitioning ? 45 : 56
+                height: ScreenSizeConfiguration.isCompactHeight ? 45 : (isTransitioning ? 45 : 56)
             )
             .frame(maxWidth: isTransitioning ? 56 : .infinity)
             .background(AppColors.primaryButton)
