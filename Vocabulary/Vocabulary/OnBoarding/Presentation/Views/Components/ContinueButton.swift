@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct ContinueButton: View {
+    var title: String = "Continue"
     let isEnabled: Bool
     let hasAppeared: Bool
     let delay: Double
     let onTap: () -> Void
 
     var body: some View {
-        Button("Continue") {
+        Button(title) {
             if isEnabled { onTap() }
         }
         .buttonStyle(GoalsButtonStyle())
