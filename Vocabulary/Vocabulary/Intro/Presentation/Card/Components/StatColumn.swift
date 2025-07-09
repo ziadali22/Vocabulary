@@ -15,7 +15,7 @@ struct StatColumn: View {
         VStack(spacing: 4) {
             Text(title)
                 .font(.title3.bold())
-                .foregroundStyle(.white)
+                .foregroundStyle(AppColors.primaryText)
             Text(subtitle)
                 .font(.caption)
                 .foregroundStyle(Color(.systemGray))

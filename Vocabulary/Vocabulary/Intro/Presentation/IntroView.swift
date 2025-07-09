@@ -10,6 +10,7 @@ import SwiftUI
 struct IntroView: View {
     @StateObject private var viewModel = IntroViewModel()
     @Binding var showWalkThrough: Bool
+    @State private var hasAppeared = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -29,7 +30,7 @@ struct IntroView: View {
                 CardView(showWalkthrough: $showWalkThrough)
                     .padding(.bottom, safeArea.bottom)
                     .background(
-                        Color(hex: "2A324B"),
+                        AppColors.background,
                         in: .rect(topLeadingRadius: 25, topTrailingRadius: 25)
                     )
             }
