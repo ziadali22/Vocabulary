@@ -21,10 +21,16 @@ struct SelectionIndicatorView: View {
                 )
             
             if isSelected {
-                Image(systemName: "checkmark")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundColor(.white)
-                    .transition(.scale.combined(with: .opacity))
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(AppColors.primaryText)
+                    .background(
+                        Circle()
+                            .strokeBorder(AppColors.primaryText, lineWidth: 1)
+                            .fill(AppColors.accent)
+                            .frame(width: 24, height: 24)
+                    )
+                    .transition(.scale)
             }
         }
         .frame(
