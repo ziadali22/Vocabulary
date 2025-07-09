@@ -45,7 +45,6 @@ final class OnboardingLocalDataSource: OnboardingLocalDataSourceProtocol {
                 }
                 
                 try self.modelContext.save()
-                print(existing?.toDomain())
                 promise(.success(()))
             } catch {
                 promise(.failure(error))
