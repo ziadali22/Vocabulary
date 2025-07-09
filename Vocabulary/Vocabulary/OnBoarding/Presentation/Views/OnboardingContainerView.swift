@@ -14,9 +14,7 @@ struct OnboardingContainerView: View {
     var body: some View {
         ZStack {
             if isOnboardingComplete {
-                Text("Main App")
-                    .font(.largeTitle)
-                    .foregroundColor(AppColors.primaryText)
+                DashboardView()
             } else {
                 ZStack {
                     IntroView(showWalkThrough: $showWalkthrough)
@@ -24,7 +22,6 @@ struct OnboardingContainerView: View {
                     OnboardingFlowView(
                         showWalkThrough: $showWalkthrough,
                         viewModel: DIContainer.shared.makeOnboardingFlowViewModel {
-                            // Onboarding completed callback
                             withAnimation {
                                 isOnboardingComplete = true
                             }

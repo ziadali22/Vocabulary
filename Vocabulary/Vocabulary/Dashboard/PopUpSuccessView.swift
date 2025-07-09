@@ -11,28 +11,28 @@ import Lottie
 
 // MARK: - Supporting Views
 
-//struct StatBadge: View {
-//    let icon: String
-//    let value: String
-//    let label: String
-//    
-//    var body: some View {
-//        VStack(spacing: 4) {
-//            Image(systemName: icon)
-//                .font(.system(size: 16, weight: .medium))
-//                .foregroundColor(.green)
-//            
-//            Text(value)
-//                .font(.system(size: 14, weight: .bold, design: .rounded))
-//                .foregroundColor(AppColors.primaryText)
-//            
-//            Text(label)
-//                .font(.system(size: 10, weight: .medium))
-//                .foregroundColor(.gray)
-//        }
-//        .frame(width: 60)
-//    }
-//}
+struct StatBadge: View {
+    let icon: String
+    let value: String
+    let label: String
+    
+    var body: some View {
+        VStack(spacing: 4) {
+            Image(systemName: icon)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.green)
+            
+            Text(value)
+                .font(.system(size: 14, weight: .bold, design: .rounded))
+                .foregroundColor(AppColors.primaryText)
+            
+            Text(label)
+                .font(.system(size: 10, weight: .medium))
+                .foregroundColor(.gray)
+        }
+        .frame(width: 60)
+    }
+}
 
 struct TopConfettiView: View {
     @State private var animate = false

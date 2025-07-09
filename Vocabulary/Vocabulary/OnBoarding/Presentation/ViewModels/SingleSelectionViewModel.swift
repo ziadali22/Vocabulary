@@ -11,7 +11,6 @@ import Combine
 @MainActor
 final class SingleSelectionViewModel<T: OnboardingOption>: ObservableObject {
     @Published var selectedOption: T?
-    @Published private(set) var isProcessing = false
     
     let title: String
     let options: [T]
@@ -32,10 +31,8 @@ final class SingleSelectionViewModel<T: OnboardingOption>: ObservableObject {
     
     func selectOption(_ option: T) {
         selectedOption = option
-        isProcessing = true
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            self?.isProcessing = false
             self?.onSelect(option)
         }
     }
