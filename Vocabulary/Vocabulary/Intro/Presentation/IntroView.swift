@@ -10,6 +10,7 @@ import SwiftUI
 struct IntroView: View {
     @StateObject private var viewModel = IntroViewModel()
     @Binding var showWalkThrough: Bool
+    @State private var hasAppeared = false
     
     var body: some View {
         GeometryReader { geometry in

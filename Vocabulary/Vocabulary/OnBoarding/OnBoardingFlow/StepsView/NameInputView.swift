@@ -47,7 +47,10 @@ struct NameInputView: View {
             isTextFieldFocused = false
         }
         .onAppear {
-            withAnimation { hasAppeared = true }
+            withAnimation {
+                isTextFieldFocused = true
+                hasAppeared = true
+            }
         }
         .onDisappear {
             hasAppeared = false
