@@ -62,7 +62,7 @@ Vocabulary/
 
 **🟢 Missing Feature:**
 - **Gap:** No learning progress tracking
-- **Solution:** Added smart Mark Learned Button and visual progress indicators
+- **Solution:** Added smart Levels from one to 21 Level and add badges for every level and visual progress indicators
 
 ---
 **Built with SwiftUI | iPhone SE Optimized | Clean Code Focus**
